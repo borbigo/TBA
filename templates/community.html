@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Members - Total Body Athletics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        .content-container {
+            max-width: 400px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .member-names-container {
+            max-height: 500px; /* Set max height to enable scrolling */
+            overflow-y: auto; /* Enable vertical scroll bar */
+        }
+        .member-name {
+            margin-bottom: 10px;
+        }
+        .home-button {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-container">
+            <h1>Community Members</h1>
+            <div class="member-names-container">
+                {% for member in all_data %}
+                    <div class="member-name">
+                        <h5><u>{{ member["Name"] }} - {{ member["Age"] }} ({{ member["Gender"] }})</u></h5>
+                    </div>
+                {% endfor %}
+            </div>
+            <button name="button" value="home" class="home-button">
+                <a href="/" style="text-decoration: none; color: #fff;">Home</a>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Club - Total Body Athletics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        .content-container {
+            max-width: 600px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .club-title {
+            display: none; /* Initially hide all locations */
+        }
+        .club-title.active {
+            display: block; /* Display the active location */
+        }
+        .club-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .address {
+            font-size: 16px;
+        }
+        .hours {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .home-button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin-top: 20px; /* Add margin-top to prevent overlap */
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 30px;
+            margin-top: 10px;
+            padding-bottom: 50px;
+        }
+        .image-container {
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-container">
+            <h1>Find Branch</h1>
+            <div class="club-title active">
+                <h2><u>{{ all_data[0]["Name"] }} - {{ all_data[0]["Location"] }}</u></h2>
+                <p>{{ all_data[0]["Hours"] }}</p>
+            </div>
+            <div class="arrow" onclick="showNextLocation()">➡️</div>
+            <button name="button" value="home" class="home-button">
+                <a href="/" style="text-decoration: none; color: #fff;">Home</a>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentLocationIndex = 0;
+        const locations = JSON.parse('{{ all_data|tojson|safe }}');
+
+        function showNextLocation() {
+            const activeLocation = document.querySelector('.club-title.active');
+            activeLocation.classList.remove('active');
+
+            currentLocationIndex = (currentLocationIndex + 1) % locations.length;
+
+            const nextLocation = document.querySelector('.club-title');
+            nextLocation.querySelector('h2').innerHTML = `<u>${locations[currentLocationIndex]["Name"]} - ${locations[currentLocationIndex]["Location"]}</u>`;
+            nextLocation.querySelector('p').innerHTML = locations[currentLocationIndex]["Hours"];
+            nextLocation.classList.add('active');
+        }
+    </script>
+</body>
+</html>
