@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text #Thoams Ampallor
+from sqlalchemy import text 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:TotalBodyAthletics@gym-db.c5fopmlkwx7y.us-east-1.rds.amazonaws.com:3306/TBAGYM'
@@ -43,7 +43,7 @@ def schedule_reservations():
 def activity():
   return render_template('activity.html')
 
-# create and view employees --wefwoeijfowijefojweofjiwoijefwieofjowjiefw
+# create and view employees 
 # view by group (i.e. all front desk, all trainers)
 #! unfinished
 @app.route('/employees') 
