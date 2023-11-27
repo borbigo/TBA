@@ -43,7 +43,7 @@ def schedule_reservations():
 def activity():
   return render_template('activity.html')
 
-# create and view employees
+# create and view employees --wefwoeijfowijefojweofjiwoijefwieofjowjiefw
 # view by group (i.e. all front desk, all trainers)
 #! unfinished
 @app.route('/employees') 
