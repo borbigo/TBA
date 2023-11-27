@@ -43,11 +43,12 @@ def schedule_reservations():
 def activity():
   return render_template('activity.html')
 
-# create and view reservations by gym members
+# create and view employees
+# view by group (i.e. all front desk, all trainers)
 #! unfinished
-@app.route('/reserve') 
-def reserve():
-  return render_template('reserve.html')
+@app.route('/employees') 
+def employees():
+  return render_template('employees.html')
 
 # view amenities specifically rooms
 #! unfinished
