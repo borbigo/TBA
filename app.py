@@ -56,16 +56,20 @@ def amenities():
   return render_template('amenities.html')
 
 # view equipment (name, type, weight)
-#! unfinished
+#TODO in progress
 @app.route('/equipment') 
 def equipment():
-  return render_template('equipment.html')
+  data_list = get_data("EQUIPMENT")
+  session['all_data'] = data_list
+  return render_template('equipment.html', all_data = data_list)
 
 # just a merchandise page
-#! unfinished
+#TODO: in progress
 @app.route('/merchandise') 
 def merchandise():
-  return render_template('merchandise.html')
+  data_list = get_data("GEAR")
+  session['all_data'] = data_list
+  return render_template('merchandise.html', all_data = data_list)
 
 # shows off member information (omits personal info)
 @app.route('/community') 
