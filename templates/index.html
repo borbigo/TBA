@@ -92,8 +92,12 @@
           Employees
         </button>
         <button name="button" value="activity" class="button">Amenities</button>
-        <button name="button" value="activity" class="button">Equipment</button>
-        <button name="button" value="activity" class="button">Merchandise</button>
+        <button name="button" value="activity" class="button">
+            <a href="{{ url_for('equipment') }}" style="text-decoration: none; color: #fff;">Equipment</a>
+        </button>
+        <button name="button" value="activity" class="button">
+            <a href="{{ url_for('merchandise') }}" style="text-decoration: none; color: #fff;">Merchandise</a>
+        </button>
         <button name="button" value="activity" class="button">
             <a href="{{ url_for('community') }}" style="text-decoration: none; color: #fff;">Community</a>
         </button>
