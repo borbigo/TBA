@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
     <meta charset="UTF-8">
@@ -67,7 +67,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             text-decoration: none; /* Remove underline */
         }
         .button:hover {
@@ -81,34 +81,34 @@
 <body>
     <div class="container">
         <div class="top-bar">
-            <div class="circle">JD</div>
+            <div class="circle"><i class="fa-regular fa-user"></i></div>
             <span class="tba-span"><b>TBA</b></span>
-            <div class="barcode">[||||]</div>
+            <div class="barcode"><i class="fa-sharp fa-solid fa-barcode" style="color: #fcb540"></i></div>
         </div>
         <h1><i class="fa-solid fa-dumbbell"></i> Total Body Athletics <i class="fa-solid fa-dumbbell"></i></h1>
         <button name="button" value="Find Club" class="button" style="grid-column: span 2;">
-          <a href="{{ url_for('find_club') }}" style="text-decoration: none; color: #fff;">Find Club</a>
+          <a href="{{ url_for('find_club') }}" style="text-decoration: none; color: #fff;">Find Club <i class="fa-solid fa-house" style="color: white"></i></a>
         </button>
         <button name="button" value="activity" class="button" style="grid-column: span 2;">
-          <a href="{{ url_for('activity') }}" style="text-decoration: none; color: #fff;">Activity</a>
+          <a href="{{ url_for('activity') }}" style="text-decoration: none; color: #fff;">Activity <i class="fa-solid fa-person-running" style="color: white"></i></a>
         </button>
         <button name="button" value="reservation" class="button">
-          <a href="{{ url_for('reservations') }}" style="text-decoration: none; color: #fff;">Reservations</a>
+          <a href="{{ url_for('reservations') }}" style="text-decoration: none; color: #fff;">Reservations <i class="fa-solid fa-list-check" style="color: white"></i></a>
         </button>
         <button name="button" value="activity" class="button">
-          Employees
+          Employees <i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
         </button>
         <button name="button" value="activity" class="button">
-            <a href="{{ url_for('amenities') }}" style="text-decoration: none; color: #fff;">Amenities</a>
+            <a href="{{ url_for('amenities') }}" style="text-decoration: none; color: #fff;">Amenities <i class="fa-solid fa-basketball" style="color: white"></i></a>
         </button>
         <button name="button" value="activity" class="button">
-            <a href="{{ url_for('equipment') }}" style="text-decoration: none; color: #fff;">Equipment</a>
+            <a href="{{ url_for('equipment') }}" style="text-decoration: none; color: #fff;">Equipment <i class="fa-sharp fa-solid fa-dumbbell" style="color: #ffffff;"></i></a>
         </button>
         <button name="button" value="activity" class="button">
-            <a href="{{ url_for('merchandise') }}" style="text-decoration: none; color: #fff;">Merchandise</a>
+            <a href="{{ url_for('merchandise') }}" style="text-decoration: none; color: #fff;">Merchandise <i class="fa-solid fa-shirt fa-sm" style="color: #ffffff;"></i></a>
         </button>
         <button name="button" value="activity" class="button">
-            <a href="{{ url_for('community') }}" style="text-decoration: none; color: #fff;">Community</a>
+            <a href="{{ url_for('community') }}" style="text-decoration: none; color: #fff;">Community <i class="fa-solid fa-users" style="color: #ffffff;"></i></a>
         </button>
         <!-- Add more buttons as needed -->
     </div>
