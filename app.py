@@ -37,10 +37,12 @@ def find_club():
 def schedule_reservations():
   return render_template('schedule_reservations.html')
 
-# covers recent gym activity/workouts
-#! unfinished
+# displays available classes for users -> needs to filter by day and/or time and/or branch
+#TODO in progress - starting html file 
 @app.route('/activity') 
 def activity():
+  data_list = get_data("CLASS")
+  session['all_data'] = data_list
   return render_template('activity.html')
 
 # create and view employees 
@@ -51,10 +53,12 @@ def employees():
   return render_template('employees.html')
 
 # view amenities specifically rooms
-#! unfinished
+#TODO in progress - starting html file 
 @app.route('/amenities') 
 def amenities():
-  return render_template('amenities.html')
+  data_list = get_data("ROOM")
+  session['all_data'] = data_list
+  return render_template('amenities.html', all_data = data_list)
 
 # view equipment (name, type, weight)
 #TODO in progress - data is dumping formatting is still needed
@@ -84,10 +88,10 @@ def merchandise():
     gear_result = db.session.execute(gear_query)
 
     # Print debug information
-    print(f"Selected Location: {selected_location}")
+    # print(f"Selected Location: {selected_location}")
 
     # Print the structure of the result set
-    print(f"Columns: {gear_result.keys()}")
+    # print(f"Columns: {gear_result.keys()}")
 
     return render_template('merchandise.html', all_locations=all_locations, selected_location=selected_location, gear_columns=gear_result.keys(), gear_result=gear_result)
 
