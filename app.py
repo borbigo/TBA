@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, session
+from flask import Flask, render_template, jsonify, session, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text 
 
@@ -57,7 +57,7 @@ def amenities():
   return render_template('amenities.html')
 
 # view equipment (name, type, weight)
-#TODO in progress
+#TODO in progress - data is dumping formatting is still needed
 @app.route('/equipment') 
 def equipment():
   data_list = get_data("EQUIPMENT")
@@ -65,12 +65,32 @@ def equipment():
   return render_template('equipment.html', all_data = data_list)
 
 # just a merchandise page
-#TODO: in progress
-@app.route('/merchandise') 
+@app.route('/merchandise', methods=['GET', 'POST']) 
 def merchandise():
-  data_list = get_data("GEAR")
-  session['all_data'] = data_list
-  return render_template('merchandise.html', all_data = data_list)
+  # Fetch distinct locations from the GYM table
+    locations_query = text('SELECT DISTINCT Location FROM GYM')
+    locations_result = db.session.execute(locations_query)
+    all_locations = [row[0] for row in locations_result]
+
+    # Default location (first one) for initial rendering
+    selected_location = all_locations[0] if all_locations else None
+
+    if request.method == 'POST':
+        # If form is submitted, update the selected location
+        selected_location = request.form.get('location')
+
+    # Fetch gear data based on the selected location
+    gear_query = text(f'SELECT * FROM GEAR WHERE Branch = "{selected_location}"')
+    gear_result = db.session.execute(gear_query)
+
+    # Print debug information
+    print(f"Selected Location: {selected_location}")
+
+    # Print the structure of the result set
+    print(f"Columns: {gear_result.keys()}")
+
+    return render_template('merchandise.html', all_locations=all_locations, selected_location=selected_location, gear_columns=gear_result.keys(), gear_result=gear_result)
+
 
 # shows off member information (omits personal info)
 @app.route('/community') 
