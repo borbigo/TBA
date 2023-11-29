@@ -91,7 +91,9 @@
         <button name="button" value="activity" class="button">
           Employees
         </button>
-        <button name="button" value="activity" class="button">Amenities</button>
+        <button name="button" value="activity" class="button">
+            <a href="{{ url_for('amenities') }}" style="text-decoration: none; color: #fff;">Amenities</a>
+        </button>
         <button name="button" value="activity" class="button">
             <a href="{{ url_for('equipment') }}" style="text-decoration: none; color: #fff;">Equipment</a>
         </button>
