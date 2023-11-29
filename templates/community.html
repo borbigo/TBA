@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background-color: #fff2dd;
             margin: 0;
         }
         .container {
@@ -21,7 +21,7 @@
         }
         .content-container {
             max-width: 400px;
-            background-color: #fff;
+            background-color: #fff6e8;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,22 +35,29 @@
         }
         .member-name {
             margin-bottom: 10px;
+            color: #18667c;
         }
         .home-button {
             margin-top: 20px;
-            background-color: #007bff;
+            background-color: #18667c;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             padding: 10px 20px;
         }
+        .home-button:hover {
+            background-color: #fcb540;
+        }
+        .page-title {
+            color: #18667c;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="content-container">
-            <h1>Community Members</h1>
+            <h1 class="page-title">Community Members</h1>
             <div class="member-names-container">
                 {% for member in all_data %}
                     <div class="member-name">

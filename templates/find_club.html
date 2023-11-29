@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background-color: #fff2dd;
             margin: 0;
         }
         .container {
@@ -21,7 +21,7 @@
         }
         .content-container {
             max-width: 600px;
-            background-color: #fff;
+            background-color: #fff6e8;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -29,8 +29,12 @@
             text-align: center;
             position: relative;
         }
+        .page-title {
+            color: #18667c; 
+        }
         .club-title {
             display: none; /* Initially hide all locations */
+            color: #fcb540;
         }
         .club-title.active {
             display: block; /* Display the active location */
@@ -51,7 +55,7 @@
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #007bff;
+            background-color: #18667c;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -59,11 +63,15 @@
             padding: 10px 20px;
             margin-top: 20px; /* Add margin-top to prevent overlap */
         }
+        .home-button:hover {
+            background-color: #fcb540;
+        }
         .arrow {
             cursor: pointer;
             font-size: 30px;
             margin-top: 10px;
             padding-bottom: 50px;
+            color: #18667c;
         }
         .image-container {
             width: 100%;
@@ -80,12 +88,12 @@
 <body>
     <div class="container">
         <div class="content-container">
-            <h1>Find Branch</h1>
+            <h1 class="page-title">Find Branch</h1>
             <div class="club-title active">
                 <h2><u>{{ all_data[0]["Name"] }} - {{ all_data[0]["Location"] }}</u></h2>
                 <p>{{ all_data[0]["Hours"] }}</p>
             </div>
-            <div class="arrow" onclick="showNextLocation()">➡️</div>
+            <div class="arrow" onclick="showNextLocation()">&#8594;</div>
             <button name="button" value="home" class="home-button">
                 <a href="/" style="text-decoration: none; color: #fff;">Home</a>
             </button>
