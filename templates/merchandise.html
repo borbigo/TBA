@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background-color: #fff2dd;
             margin: 0;
         }
         .container {
@@ -21,7 +21,7 @@
         }
         .content-container {
             max-width: 600px;
-            background-color: #fff;
+            background-color: #fff6e8;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -31,12 +31,15 @@
         }
         .home-button {
             margin-top: 20px;
-            background-color: #007bff;
+            background-color: #18667c;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             padding: 10px 20px;
+        }
+        .home-button:hover {
+            background-color: #fcb540;
         }
         table {
             width: 100%;
@@ -53,12 +56,24 @@
         th {
             background-color: #f2f2f2;
         }
+        .page-title {
+            color: #18667c;
+        }
+        label, select {
+            color: #18667c;
+        }
+        .table-content{
+            color: #18667c;
+        }
+        .table-headers {
+            color: #fcb540;
+        }
     </style>
 </head>
 <body>
   <div class="container">
       <div class="content-container">
-          <h1>Merchandise</h1>
+          <h1 class="page-title">Merchandise</h1>
 
           <form method="post">
               <label for="location">Select Location:</label>
@@ -71,9 +86,9 @@
           </form>
 
           {% if gear_columns %}
-              <table>
+              <table class="content-table">
                   <thead>
-                      <tr>
+                      <tr class="table-headers">
                           {% for column in gear_columns %}
                               {% if column != 'ItemID' %} <!-- Exclude 'ItemID' from display -->
                                   <th>{{ column }}</th>
@@ -83,7 +98,7 @@
                   </thead>
                   <tbody>
                       {% for row in gear_result %}
-                          <tr>
+                          <tr class="table-content">
                               {% for column in gear_columns %}
                                   {% if column != 'ItemID' %} <!-- Exclude 'ItemID' from display -->
                                       <td>{{ row[column] }}</td>

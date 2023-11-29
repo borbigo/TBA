@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym Application</title>
+    <script src="https://kit.fontawesome.com/08c68b6b2b.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background-color: #fff2dd;
         }
         .container {
             display: grid;
@@ -18,14 +19,14 @@
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
-            background-color: rgb(228, 228, 228);
+            background-color: #fff6e8;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .top-bar {
             grid-column: span 2;
-            background-color: #206dbe;
+            background-color: #18667c;
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -35,11 +36,12 @@
         }
         .barcode {
             font-size: 24px;
+            color: #fcb540;
         }
         .circle {
             width: 30px;
             height: 30px;
-            background-color: #ffffff;
+            background-color: #fcb540;
             color: #000000;
             border-radius: 50%;
             display: flex;
@@ -49,16 +51,18 @@
         }
         h1 {
             grid-column: span 2;
-            color: #333;
+            color: #fba824;
             margin: 10px 0; /* Adjust the margin to reduce space above and below */
+            font-size: 30px;
         }
         .tba-span {
             font-size: 40px; /* Adjust the font size as needed */
+            color: #fcb540;
         }
         .button {
             grid-column: span 1;
             padding: 40px;
-            background-color: #206dbe;
+            background-color: #18667c;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -67,7 +71,10 @@
             text-decoration: none; /* Remove underline */
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #fcb540;
+        }
+        i {
+            color: #18667c;
         }
     </style>
 </head>
@@ -78,7 +85,7 @@
             <span class="tba-span"><b>TBA</b></span>
             <div class="barcode">[||||]</div>
         </div>
-        <h1>Total Body Athletics</h1>
+        <h1><i class="fa-solid fa-dumbbell"></i> Total Body Athletics <i class="fa-solid fa-dumbbell"></i></h1>
         <button name="button" value="Find Club" class="button" style="grid-column: span 2;">
           <a href="{{ url_for('find_club') }}" style="text-decoration: none; color: #fff;">Find Club</a>
         </button>
