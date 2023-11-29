@@ -31,12 +31,6 @@ def find_club():
   session['all_data'] = data_list
   return render_template('find_club.html', all_data = data_list) 
 
-# space/room availability -> what's booked out for classes
-#! unfinished
-@app.route('/schedule_reservations')
-def schedule_reservations():
-  return render_template('schedule_reservations.html')
-
 # displays available classes for users -> needs to filter by day and/or time and/or branch
 #TODO in progress - starting html file 
 @app.route('/activity') 
@@ -44,6 +38,12 @@ def activity():
   data_list = get_data("CLASS")
   session['all_data'] = data_list
   return render_template('activity.html')
+
+# active reservations
+#! unfinished
+@app.route('/reservations')
+def reservations():
+  return render_template('reservations.html')
 
 # create and view employees 
 # view by group (i.e. all front desk, all trainers)
