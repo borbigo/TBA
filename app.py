@@ -47,10 +47,11 @@ def reservations():
 
 # create and view employees 
 # view by group (i.e. all front desk, all trainers)
-#! unfinished
 @app.route('/employees') 
 def employees():
-  return render_template('employees.html')
+  data_list = get_data("EMPLOYEE")
+  session['all_data'] = data_list
+  return render_template('employees.html', all_data = data_list)
 
 # view amenities specifically rooms
 #TODO in progress - starting html file 
