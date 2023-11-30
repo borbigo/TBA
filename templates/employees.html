@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment - Total Body Athletics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff2dd;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        .content-container {
+            max-width: 400px;
+            background-color: #fff6e8;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .equipment-types {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .equipment-type {
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 5px;
+            text-align: center;
+            color: #18667c;
+        }
+        .equipment-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #155567;
+        }
+        .page-title {
+            color: #18667c;
+        }
+        .equipment-item {
+            margin-bottom: 5px;
+        }
+        .home-button {
+            margin-top: 20px;
+            background-color: #18667c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        .home-button:hover {
+            background-color: #fcb540;
+        }
+    </style>
+</head>
+<body>
+    <!-- hello -->
+    <div class="container">
+        <div class="content-container">
+            <h1 class="page-title">Employees</h1>
+            <div class="equipment-types">
+                {% set employee_by_type = {} %}
+                {% for employee in all_data %}
+                    {% set type = employee["Type"] %}
+                    {% set type_employee = employee_by_type[type] if type in employee_by_type else [] %}
+                    {% set _ = type_employee.append(employee) %}
+                    {% set _ = employee_by_type.update({type: type_employee}) %}
+                {% endfor %}
+
+                {% for type, employee_list in employee_by_type.items() %}
+                    <div class="equipment-type">{{ type }}</div>
+                    <ul class="equipment-list">
+                        {% for item in employee_list %}
+                            <li class="equipment-item">
+                               <u>{{ item["ID"] }}</u> {{ item["Name"] }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+            <button name="button" value="home" class="home-button">
+                <a href="/" style="text-decoration: none; color: #fff;">Home</a>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
