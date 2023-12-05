@@ -52,7 +52,7 @@ def activity():
         
   # Fetch gear data based on the selected location
   info_query = text(f'''
-    SELECT CLASS.Type, CLASS.Time, EMPLOYEE.Name AS Instructor, GYM.Location AS Location
+    SELECT CLASS.Type, CLASS.Time, CLASS.Day, EMPLOYEE.Name AS Instructor, GYM.Location AS Location
     FROM CLASS
     JOIN EMPLOYEE ON CLASS.ID = EMPLOYEE.ClassID
     JOIN GYM ON CLASS.Branch = GYM.Location
