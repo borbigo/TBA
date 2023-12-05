@@ -84,12 +84,31 @@ def employees():
 # basic list view
 # categorize by TYPE
 # embed images with each one (take from online)
-#TODO in progress - thomas
-@app.route('/amenities') 
+@app.route('/amenities', methods=['GET', 'POST']) 
 def amenities():
-  data_list = get_data("ROOM")
-  session['all_data'] = data_list
-  return render_template('amenities.html', all_data = data_list)
+  # Fetch distinct locations from the GYM table
+    locations_query = text('SELECT DISTINCT Location FROM GYM')
+    locations_result = db.session.execute(locations_query)
+    all_locations = [row[0] for row in locations_result]
+
+    # Default location (first one) for initial rendering
+    selected_location = all_locations[0] if all_locations else None
+
+    if request.method == 'POST':
+        # If form is submitted, update the selected location
+        selected_location = request.form.get('location')
+
+    # Fetch gear data based on the selected location
+    gear_query = text(f'SELECT * FROM ROOM WHERE Branch = "{selected_location}"')
+    gear_result = db.session.execute(gear_query)
+
+    # Print debug information
+    # print(f"Selected Location: {selected_location}")
+
+    # Print the structure of the result set
+    # print(f"Columns: {gear_result.keys()}")
+
+    return render_template('amenities.html', all_locations=all_locations, selected_location=selected_location, amenities_column=gear_result.keys(), amenities_result=gear_result)
 
 # view equipment (name, type, weight)
 #TODO in progress - formatting needed
