@@ -90,7 +90,7 @@
                   <thead>
                       <tr class="table-headers">
                           {% for column in gear_columns %}
-                              {% if column != 'ItemID' %} <!-- Exclude 'ItemID' from display -->
+                              {% if column != 'Location' %} <!-- Exclude 'Location' from display -->
                                   <th>{{ column }}</th>
                               {% endif %}
                           {% endfor %}
@@ -100,7 +100,7 @@
                       {% for row in gear_result %}
                           <tr class="table-content">
                               {% for column in gear_columns %}
-                                  {% if column != 'ItemID' %} <!-- Exclude 'ItemID' from display -->
+                                  {% if column != 'Location' %} <!-- Exclude 'Location' from display -->
                                       <td>{{ row[column] }}</td>
                                   {% endif %}
                               {% endfor %}
