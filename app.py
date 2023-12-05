@@ -84,7 +84,6 @@ def employees():
 # basic list view
 # categorize by TYPE
 # embed images with each one (take from online)
-#TODO in progress - thomas
 @app.route('/amenities', methods=['GET', 'POST']) 
 def amenities():
   # Fetch distinct locations from the GYM table
