@@ -60,17 +60,36 @@ def activity():
   ''')
 
   info_result = db.session.execute(info_query, {'selected_location': selected_location})
-  print(f"Selected Location: {selected_location}")
-  print(f"Columns: {info_result.keys()}")
+  # print(f"Selected Location: {selected_location}")
+  # print(f"Columns: {info_result.keys()}")
     
   # Pass the data to the HTML template
   return render_template('activity.html', all_locations=all_locations, selected_location=selected_location, gear_columns=info_result.keys(), gear_result=info_result)
 
 # active reservations
-#! unfinished - thomas
-@app.route('/reservations')
+@app.route('/reservations', methods=['GET', 'POST'])
 def reservations():
-  return render_template('reservations.html')
+   # Fetch all gym locations
+  locations_query = text('SELECT DISTINCT Location FROM GYM')
+  locations_result = db.session.execute(locations_query)
+  all_locations = [row[0] for row in locations_result]
+
+  # Determine the selected location
+  selected_location = all_locations[0] if all_locations else None
+
+  if request.method == 'POST':
+    # If form is submitted, update the selected location
+    selected_location = request.form.get('location')
+  
+  info_query = text(f'''
+    SELECT MEMBER.Name AS Member, ROOM.Name AS Room, ROOM.Branch 
+    FROM MEMBER
+    JOIN ROOM 
+    ON MEMBER.Reserved = ROOM.RoomID
+    WHERE ROOM.Branch = "{selected_location}"
+  ''')
+  info_result = db.session.execute(info_query, {'selected_location': selected_location})
+  return render_template('reservations.html', all_locations=all_locations, selected_location=selected_location, gear_columns=info_result.keys(), gear_result=info_result)
 
 # create and view employees 
 # view by group (i.e. all front desk, all trainers)
