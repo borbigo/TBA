@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipment - Total Body Athletics</title>
+    <script src="https://kit.fontawesome.com/08c68b6b2b.js" crossorigin="anonymous"></script>
+    <title>Equipment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,7 +21,7 @@
             position: relative;
         }
         .content-container {
-            max-width: 400px;
+            max-width: 600px;
             background-color: #fff6e8;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -28,32 +29,6 @@
             padding: 20px;
             text-align: center;
             position: relative;
-        }
-        .equipment-types {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-        .equipment-type {
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: underline;
-            margin-bottom: 5px;
-            text-align: center;
-            color: #18667c;
-        }
-        .equipment-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #155567;
-        }
-        .page-title {
-            color: #18667c;
-        }
-        .equipment-item {
-            margin-bottom: 5px;
         }
         .home-button {
             margin-top: 20px;
@@ -67,36 +42,81 @@
         .home-button:hover {
             background-color: #fcb540;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .page-title {
+            color: #18667c;
+        }
+        label, select {
+            color: #18667c;
+        }
+        .table-content{
+            color: #18667c;
+        }
+       .table-headers {
+            color: #fcb540;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content-container">
-            <h1 class="page-title">Equipment</h1>
-            <div class="equipment-types">
-                {% set equipment_by_type = {} %}
-                {% for equipment in all_data %}
-                    {% set type = equipment["Type"] %}
-                    {% set type_equipment = equipment_by_type[type] if type in equipment_by_type else [] %}
-                    {% set _ = type_equipment.append(equipment) %}
-                    {% set _ = equipment_by_type.update({type: type_equipment}) %}
-                {% endfor %}
+  <div class="container">
+      <div class="content-container">
+          <h1 class="page-title">Equipment <i class="fa-sharp fa-solid fa-dumbbell" ></i></h1>
 
-                {% for type, equipment_list in equipment_by_type.items() %}
-                    <div class="equipment-type">{{ type }}</div>
-                    <ul class="equipment-list">
-                        {% for item in equipment_list %}
-                            <li class="equipment-item">
-                                {{ item["Name"] }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
-            </div>
-            <button name="button" value="home" class="home-button">
-                <a href="/" style="text-decoration: none; color: #fff;">Home</a>
-            </button>
-        </div>
-    </div>
+          <form method="post">
+              <label for="type">Select Type:</label>
+              <select name="type" id="location">
+                  {% for type in all_Types %}
+                      <option value="{{ type }}" {% if type == selected_Type %}selected{% endif %}>{{ type }}</option>
+                  {% endfor %}
+              </select>
+              <button type="submit">Submit</button>
+          </form>
+
+          {% if  employee_column  %}
+              <table class="content-table">
+                  <thead>
+                      <tr class="table-headers">
+                          {% for column in  employee_column  %}
+                              {% if column != 'Type' and column != 'Location'%} <!-- Exclude 'ItemID' from display -->
+                                  <th>{{ column }}</th>
+                              {% endif %}
+                          {% endfor %}
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for row in employee_result %}
+                          <tr class="table-content">
+                              {% for column in  employee_column  %}
+                                  {% if column != 'Type' and column != 'Location'%} <!-- Exclude 'ItemID' from display -->
+                                      <td>{{ row[column] }}</td>
+                                  {% endif %}
+                              {% endfor %}
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          {% else %}
+              <p>No Equipment data available.</p>
+          {% endif %}
+
+          <button name="button" value="home" class="home-button">
+              <a href="/" style="text-decoration: none; color: #fff;">Home</a>
+          </button>
+      </div>
+  </div>
 </body>
 </html>
