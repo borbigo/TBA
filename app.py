@@ -52,7 +52,7 @@ def activity():
         
   # Fetch gear data based on the selected location
   info_query = text(f'''
-    SELECT CLASS.Type, CLASS.Time, EMPLOYEE.Name AS Instructor, GYM.Location AS Location
+    SELECT CLASS.Type, CLASS.Time, CLASS.Day, EMPLOYEE.Name AS Instructor, GYM.Location AS Location
     FROM CLASS
     JOIN EMPLOYEE ON CLASS.ID = EMPLOYEE.ClassID
     JOIN GYM ON CLASS.Branch = GYM.Location
@@ -60,25 +60,64 @@ def activity():
   ''')
 
   info_result = db.session.execute(info_query, {'selected_location': selected_location})
-  print(f"Selected Location: {selected_location}")
-  print(f"Columns: {info_result.keys()}")
+  # print(f"Selected Location: {selected_location}")
+  # print(f"Columns: {info_result.keys()}")
     
   # Pass the data to the HTML template
   return render_template('activity.html', all_locations=all_locations, selected_location=selected_location, gear_columns=info_result.keys(), gear_result=info_result)
 
 # active reservations
-#! unfinished - thomas
-@app.route('/reservations')
+@app.route('/reservations', methods=['GET', 'POST'])
 def reservations():
-  return render_template('reservations.html')
+   # Fetch all gym locations
+  locations_query = text('SELECT DISTINCT Location FROM GYM')
+  locations_result = db.session.execute(locations_query)
+  all_locations = [row[0] for row in locations_result]
+
+  # Determine the selected location
+  selected_location = all_locations[0] if all_locations else None
+
+  if request.method == 'POST':
+    # If form is submitted, update the selected location
+    selected_location = request.form.get('location')
+  
+  info_query = text(f'''
+    SELECT MEMBER.Name AS Member, ROOM.Name AS Room, ROOM.Branch 
+    FROM MEMBER
+    JOIN ROOM 
+    ON MEMBER.Reserved = ROOM.RoomID
+    WHERE ROOM.Branch = "{selected_location}"
+  ''')
+  info_result = db.session.execute(info_query, {'selected_location': selected_location})
+  return render_template('reservations.html', all_locations=all_locations, selected_location=selected_location, gear_columns=info_result.keys(), gear_result=info_result)
 
 # create and view employees 
 # view by group (i.e. all front desk, all trainers)
-@app.route('/employees') 
+@app.route('/employees', methods=['GET', 'POST']) 
 def employees():
-  data_list = get_data("EMPLOYEE")
-  session['all_data'] = data_list
-  return render_template('employees.html', all_data = data_list)
+  # Fetch distinct locations from the GYM table
+    Type_query = text('SELECT DISTINCT Type FROM EMPLOYEE')
+    Type_result = db.session.execute(Type_query)
+    all_Types = [row[0] for row in Type_result]
+
+    # Default location (first one) for initial rendering
+    selected_Type = all_Types[0] if all_Types else None
+
+    if request.method == 'POST':
+        # If form is submitted, update the selected location
+        selected_Type = request.form.get('type')
+
+    # Fetch gear data based on the selected location
+    gear_query = text(f'SELECT * FROM EMPLOYEE WHERE Type = "{selected_Type}"')
+    gear_result = db.session.execute(gear_query)
+
+    # Print debug information
+    # print(f"Selected Location: {selected_location}")
+
+    # Print the structure of the result set
+    # print(f"Columns: {gear_result.keys()}")
+
+    return render_template('employees.html', all_Types=all_Types, selected_Type=selected_Type, employee_column=gear_result.keys(), employee_result=gear_result)
 
 # view amenities specifically rooms
 # basic list view
@@ -112,11 +151,31 @@ def amenities():
 
 # view equipment (name, type, weight)
 #TODO in progress - formatting needed
-@app.route('/equipment') 
+@app.route('/equipment' , methods=['GET', 'POST']) 
 def equipment():
-  data_list = get_data("EQUIPMENT")
-  session['all_data'] = data_list
-  return render_template('equipment.html', all_data = data_list)
+  # Fetch distinct locations from the GYM table
+    Type_query = text('SELECT DISTINCT Type FROM EQUIPMENT')
+    Type_result = db.session.execute(Type_query)
+    all_Types = [row[0] for row in Type_result]
+
+    # Default location (first one) for initial rendering
+    selected_Type = all_Types[0] if all_Types else None
+
+    if request.method == 'POST':
+        # If form is submitted, update the selected location
+        selected_Type = request.form.get('type')
+
+    # Fetch gear data based on the selected location
+    gear_query = text(f'SELECT * FROM EQUIPMENT WHERE Type = "{selected_Type}"')
+    gear_result = db.session.execute(gear_query)
+
+    # Print debug information
+    # print(f"Selected Location: {selected_location}")
+
+    # Print the structure of the result set
+    # print(f"Columns: {gear_result.keys()}")
+
+    return render_template('equipment.html', all_Types=all_Types, selected_Type=selected_Type, employee_column=gear_result.keys(), employee_result=gear_result)
 
 # just a merchandise page
 @app.route('/merchandise', methods=['GET', 'POST']) 
