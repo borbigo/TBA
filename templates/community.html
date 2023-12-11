@@ -53,12 +53,24 @@
         .page-title {
             color: #18667c;
         }
+
+        h3{
+            font-family: Arial, sans-serif;
+            border: 2px solid #fcb540;
+            padding: 2px 1px 2px 1px;
+            color:#fcb540;
+
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="content-container">
             <h1 class="page-title">Community Members <i class="fa-solid fa-users" ></i></h1>
+            {% for count in member_result%}
+            {% set total_members = count[0] %} 
+            <h3> Total Members: {{ total_members }}</h3>
+            {% endfor %}
             <div class="member-names-container">
                 {% for member in all_data %}
                     <div class="member-name">
