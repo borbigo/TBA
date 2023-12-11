@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
     <script src="https://kit.fontawesome.com/08c68b6b2b.js" crossorigin="anonymous"></script>
+=======
+>>>>>>> Stashed changes
     <title>Amenities</title>
     <style>
         body {
@@ -74,7 +77,11 @@
 <body>
   <div class="container">
       <div class="content-container">
+<<<<<<< Updated upstream
           <h1 class="page-title">Amenities <i class="fa-solid fa-basketball" ></i></h1>
+=======
+          <h1 class="page-title">Amenities</h1>
+>>>>>>> Stashed changes
 
           <form method="post">
               <label for="location">Select Location:</label>
@@ -91,7 +98,11 @@
                   <thead>
                       <tr class="table-headers">
                           {% for column in  amenities_column  %}
+<<<<<<< Updated upstream
                               {% if column != 'Hours_Reserved' and column != 'Branch' %} <!-- Exclude 'ItemID' from display -->
+=======
+                              {% if column != 'Hours_reserved' or column != 'Branch'%} <!-- Exclude 'ItemID' from display -->
+>>>>>>> Stashed changes
                                   <th>{{ column }}</th>
                               {% endif %}
                           {% endfor %}
@@ -101,7 +112,11 @@
                       {% for row in amenities_result %}
                           <tr class="table-content">
                               {% for column in  amenities_column  %}
+<<<<<<< Updated upstream
                                   {%if column != 'Hours_Reserved' and column != 'Branch' %} <!-- Exclude 'ItemID' from display -->
+=======
+                                  {%if column != 'Hours_reserved' or column != 'Branch'%} <!-- Exclude 'ItemID' from display -->
+>>>>>>> Stashed changes
                                       <td>{{ row[column] }}</td>
                                   {% endif %}
                               {% endfor %}

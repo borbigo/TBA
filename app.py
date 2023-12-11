@@ -120,10 +120,8 @@ def employees():
     return render_template('employees.html', all_Types=all_Types, selected_Type=selected_Type, employee_column=gear_result.keys(), employee_result=gear_result)
 
 # view amenities specifically rooms
-# basic list view
-# categorize by TYPE
-# embed images with each one (take from online)
-@app.route('/amenities', methods=['GET', 'POST']) 
+#TODO in progress - starting html file 
+@app.route('/amenities') 
 def amenities():
   # Fetch distinct locations from the GYM table
     locations_query = text('SELECT DISTINCT Location FROM GYM')
