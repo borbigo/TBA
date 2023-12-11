@@ -91,7 +91,7 @@
                   <thead>
                       <tr class="table-headers">
                           {% for column in  employee_column  %}
-                              {% if column != 'Type' and column != 'Location'%} <!-- Exclude 'ItemID' from display -->
+                              {% if column != 'Type' and column != 'Location' and column != 'Hours_Reserved' and column != 'Branch' and column != 'RoomID'%} <!-- Exclude 'ItemID' from display -->
                                   <th>{{ column }}</th>
                               {% endif %}
                           {% endfor %}
@@ -101,7 +101,7 @@
                       {% for row in employee_result %}
                           <tr class="table-content">
                               {% for column in  employee_column  %}
-                                  {% if column != 'Type' and column != 'Location'%} <!-- Exclude 'ItemID' from display -->
+                                  {% if column != 'Type' and column != 'Location' and column != 'Hours_Reserved' and column != 'Branch' and column != 'RoomID'%} <!-- Exclude 'ItemID' from display -->
                                       <td>{{ row[column] }}</td>
                                   {% endif %}
                               {% endfor %}

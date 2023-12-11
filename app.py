@@ -166,7 +166,12 @@ def equipment():
         selected_Type = request.form.get('type')
 
     # Fetch gear data based on the selected location
-    gear_query = text(f'SELECT * FROM EQUIPMENT WHERE Type = "{selected_Type}"')
+    gear_query = text(f'''
+      SELECT E.Name AS 'Equipment', E. Weight, E.Type, E.Location, R.RoomID, R.Name AS 'Room'
+      FROM EQUIPMENT E, ROOM R
+      WHERE E.Location = R.RoomID
+      AND E.Type = "{selected_Type}"
+    ''')
     gear_result = db.session.execute(gear_query)
 
     # Print debug information
