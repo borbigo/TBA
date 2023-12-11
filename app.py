@@ -210,7 +210,11 @@ def merchandise():
 def community():
   data_list = get_data("MEMBER")
   session['all_data'] = data_list
-  return render_template('community.html', all_data = data_list)
+
+  gear_query = text(f'SELECT COUNT(*) FROM MEMBER') 
+  gear_result = db.session.execute(gear_query)
+
+  return render_template('community.html', all_data = data_list, member_result = gear_result)
 
 if __name__ == '__main__':
   app.run(debug=True)
